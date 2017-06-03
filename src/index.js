@@ -1,35 +1,20 @@
 // @flow
-
-const electron = require('electron')
-const path = require('path')
-const url = require('url')
-
-const BrowserWindow = electron.BrowserWindow
-const app = electron.app
+const { app } = require('electron')
+const { windows } = require('./config/electron.config')
+const { cleanup, destroyWindow, makeWindow } = require('./utils/window.utils')(app)
 
 let mainWindow = {}
 
-const createWindow = () => {
-  mainWindow = new BrowserWindow({ width: 800, height: 600 })
-
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
-
-  mainWindow.on('closed', () => { mainWindow = null })
+const bootstrap = (mainSettings) => {
+  mainWindow = makeWindow(mainSettings)
+  const closeMain = () => destroyWindow(mainWindow)
+  mainWindow.on('closed', closeMain)
 }
 
-app.on('ready', createWindow)
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+const main = () => {
+  const bootstrapMain = () => bootstrap(windows.main)
+  app.on('ready', bootstrapMain)
+  app.on('window-all-closed', cleanup)
+}
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
+main()
