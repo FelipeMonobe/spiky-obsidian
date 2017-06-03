@@ -1,7 +1,6 @@
-// @flow
 const { app } = require('electron')
 const { windows } = require('./config/electron.config')
-const { cleanup, destroyWindow, makeWindow } = require('./utils/window.utils')(app)
+const { cleanup, destroyWindow, makeWindow } = require('./util/window.util')(app)
 
 let mainWindow = {}
 

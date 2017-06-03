@@ -2,7 +2,7 @@ const path = require('path')
 const url = require('url')
 
 const mainController = url.format({
-  pathname: path.join(__dirname, 'index.html'),
+  pathname: path.resolve('src/app/reader/template.html'),
   protocol: 'file:',
   slashes: true
 })
@@ -10,7 +10,7 @@ const mainController = url.format({
 module.exports = {
   windows: {
     main: {
-      size: { width: 800, height: 600 },
+      shape: { width: 800, height: 600, frame: false },
       controller: mainController
     }
   }

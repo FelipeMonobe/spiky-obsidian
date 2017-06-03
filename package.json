@@ -8,7 +8,7 @@
     "flow": "flow",
     "flow:install": "flow-typed install",
     "test": "mocha app/**/*.spec.js",
-    "start": "electron ./build"
+    "start": "electron ./src"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,14 @@
   },
   "homepage": "https://github.com/FelipeMonobe/spiky-obsidian#readme",
   "dependencies": {
-    "electron": "^1.6.10"
+    "dexie": "^1.5.1",
+    "electron": "^1.6.10",
+    "glob": "^7.1.2",
+    "graceful-fs": "^4.1.11",
+    "node-xlsx": "^0.7.4",
+    "q": "^1.5.0",
+    "ramda": "^0.24.1",
+    "xml2js": "^0.4.17"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
