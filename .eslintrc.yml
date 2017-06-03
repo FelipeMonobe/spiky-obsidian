@@ -1,0 +1,13 @@
+parser: babel-eslint
+extends:
+  - standard
+  - plugin:flowtype/recommended
+env:
+  node: true
+  mocha: true
+plugins:
+  - flowtype
+  - import
+rules:
+  no-useless-escape: 0
+  no-var: 2

@@ -1,0 +1,48 @@
+{
+  "name": "spiky-obsidian",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "flow-remove-types -p ./src -d build/ -i node_modules",
+    "flow": "flow",
+    "flow:install": "flow-typed install",
+    "test": "mocha app/**/*.spec.js",
+    "start": "electron ./build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FelipeMonobe/spiky-obsidian.git"
+  },
+  "keywords": [
+    "XML",
+    "Processing",
+    "NodeJS",
+    "Electron"
+  ],
+  "author": "Felipe Mikio de Vasconcelos Monobe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FelipeMonobe/spiky-obsidian/issues"
+  },
+  "homepage": "https://github.com/FelipeMonobe/spiky-obsidian#readme",
+  "dependencies": {
+    "electron": "^1.6.10"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "chai": "^4.0.1",
+    "chai-as-promised": "^6.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-flowtype": "^2.34.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.47.0",
+    "flow-remove-types": "^1.2.1",
+    "flow-typed": "^2.1.2",
+    "mocha": "^3.4.2"
+  }
+}
