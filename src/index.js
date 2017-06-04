@@ -1,6 +1,6 @@
 const { app } = require('electron')
-const { windows } = require('./config/electron.config')
-const { cleanup, destroyWindow, makeWindow } = require('./util/window.util')(app)
+const { windows } = require('./config/electron')
+const { cleanup, destroyWindow, makeWindow } = require('./util/window')(app)
 
 let mainWindow = {}
 

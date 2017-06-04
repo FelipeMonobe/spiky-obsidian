@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <title>Spiky Obsidian | Interpretador</title>
+</head>
+
+<body>
+  <h1>Fase 2 - Interpretador</h1>
+  <div>
+    <h3>Objetivos:</h3>
+    <ol>
+      <li>Definir modelo de XML</li>
+      <li>Definir propriedades para extração</li>
+      <li>Definir propriedades para consolidar</li>
+    </ol>
+  </div>
+  <div>
+    <div>
+    <label>Modelos:</label>
+    <div>
+      <select id="xmlModel" onchange="vm.previewXmlModel()" value="">
+        <option selected="selected" disabled>Selecione</option>
+      </select>
+    </div>
+  </div>
+  <div>
+  <label>Propriedades:</label>
+  <div>
+    <select id="xmlProperties" multiple></select>
+  </div>
+</div>
+  </div>
+  <br><br>
+  <button type="button">Avançar</button>
+  <script async src="./controller.js"></script>
+</body>
+
+</html>
