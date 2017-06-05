@@ -2,8 +2,11 @@ const Dexie = require('dexie')
 const rawXmlSchema = require('../schemas/rawXml')
 const { instance, version } = require('../config/indexedDb')
 
+let db = {}
+
 const bootstrap = () => {
-  const db = new Dexie(instance.name)
+  db = new Dexie(instance.name)
+
   const tables = _makeTables([
     rawXmlSchema
   ])
@@ -15,6 +18,8 @@ const bootstrap = () => {
   return db.open()
 }
 
+const getDbInstance = () => db
+
 const _makeTables = (schemas) => schemas
   .reduce((tables, schema) => {
     const keys = schema.keys.join(',')
@@ -23,5 +28,6 @@ const _makeTables = (schemas) => schemas
   }, {})
 
 module.exports = {
-  bootstrap
+  bootstrap,
+  getDbInstance
 }

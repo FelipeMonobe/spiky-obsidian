@@ -11,27 +11,31 @@
     <ol>
       <li>Definir modelo de XML</li>
       <li>Definir propriedades para extração</li>
-      <li>Definir propriedades para consolidar</li>
+      <li>Definir propriedades para consolidar (somatório)</li>
     </ol>
   </div>
   <div>
     <div>
-    <label>Modelos:</label>
-    <div>
-      <select id="xmlModel" onchange="vm.previewXmlModel()" value="">
+      <label>Modelos:</label>
+      <div>
+        <select id="xmlModel" onchange="vm.previewXmlModel()" value="">
         <option selected="selected" disabled>Selecione</option>
       </select>
+      </div>
+    </div>
+    <div>
+      <label>Propriedades:</label>
+      <div>
+        <select id="xmlProperties" style="height: 400px" multiple></select>
+      </div>
+    </div>
+    <div>
+      <label>Consolidar?</label>
+      <input id="willProcess" type="checkbox">
     </div>
   </div>
-  <div>
-  <label>Propriedades:</label>
-  <div>
-    <select id="xmlProperties" multiple></select>
-  </div>
-</div>
-  </div>
-  <br><br>
-  <button type="button">Avançar</button>
+  <br>
+  <button type="button" onclick="vm.pluckProperties()">Avançar</button>
   <script async src="./controller.js"></script>
 </body>
 
