@@ -1,25 +1,25 @@
 const { last, path } = require('ramda')
 const { parseString } = require('xml2js')
-const { bootstrap } = require('../../util/db')
 const { allSettled, denodeify } = require('q')
+const { getDbInstance } = require('../../util/db')
 
 const _parseString = denodeify(parseString)
 
 const parseToXml = async(rawXmls) => {
   const _parserOptions = { explicitArray: false, trim: true }
-  const xmls = await allSettled(rawXmls.map(x => _parseString(x.content, _parserOptions)))
+  const xmls = await allSettled(rawXmls.map(x => _parseString(x.raw, _parserOptions)))
   const successfulXmls = xmls.filter(x => x.state === 'fulfilled')
   const xmlsValues = successfulXmls.map(x => x.value)
   return xmlsValues
 }
 
 const getLastRawXml = async() => {
-  const db = await bootstrap()
-  const lastRawXmls = db
-    .table('rawXml')
+  const database = getDbInstance()
+
+  return database
+    .table('xmls')
     .orderBy('id')
     .last()
-  return lastRawXmls
 }
 
 const pluckXmls = (xmls, options) => {
@@ -45,11 +45,18 @@ const pluckXmls = (xmls, options) => {
     })
 }
 
-// TODO
-const updateXmls = (xmls) => {}
+const updateXmls = (id, xmls) => {
+  const database = getDbInstance()
+  const query = { plucked: xmls }
+
+  return database
+  .table('xmls')
+  .update(id, query)
+}
 
 module.exports = {
   getLastRawXml,
   parseToXml,
-  pluckXmls
+  pluckXmls,
+  updateXmls
 }

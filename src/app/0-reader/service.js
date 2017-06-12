@@ -1,7 +1,7 @@
 const glob = require('glob')
 const { readFile } = require('graceful-fs')
-const { bootstrap } = require('../../util/db')
 const { all, defer, denodeify } = require('q')
+const { getDbInstance } = require('../../util/db')
 const { remote: { dialog } } = require('electron')
 
 const _readFile = denodeify(readFile)
@@ -13,9 +13,9 @@ const _readXmlContent = (cwd, xmlPaths) => all(xmlPaths
 
 const insertXmlEntries = async (xmls) => {
   const date = new Date()
-  const entries = xmls.map(content => ({ date, content }))
-  const db = await bootstrap()
-  return db.rawXml.put(entries)
+  const entries = xmls.map(raw => ({ date, raw }))
+  const db = getDbInstance()
+  return db.xmls.put(entries)
 }
 
 const openDirectoryDialog = () => {

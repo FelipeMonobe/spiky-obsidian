@@ -1,5 +1,5 @@
 const { getLastNodes } = require('../../util/object')
-const { getLastRawXml, parseToXml, pluckXmls, updateXml } = require('./service')
+const { getLastRawXml, parseToXml, pluckXmls, updateXmls } = require('./service')
 const { groupByFirstProperty, filterByObjectPropertyName } = require('../../util/array')
 
 const vm = {}
@@ -27,20 +27,17 @@ vm.previewXmlModel = () => {
   })
 }
 
-vm.pluckProperties = () => {
+vm.pluckProperties = async () => {
   const willProcess = document.querySelector('willProcess')
   const selectProperties = document.querySelector('#xmlProperties')
   const selectedOptions = Array.from(selectProperties.options)
     .filter(x => x.selected)
-  const nextURL = willProcess
-    ? '../2-processor/template.html'
-    : '../3-exporter/template.html'
+  const nextURL = '../2-exporter/template.html'
 
   const pluckedXmls = pluckXmls(vm.xmlsByModel, selectedOptions)
+  const lastRawXmlsId = vm.lastRawXmls.id
 
-// TODO
-  vm.lastRawXmls
-    .update()
+  await updateXmls(lastRawXmlsId, pluckedXmls)
 
   window.location.href = nextURL
 }

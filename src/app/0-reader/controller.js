@@ -11,7 +11,7 @@ vm.selectDirectory = async () => {
 
 vm.readAndStoreRawXmls = async () => {
   const xmls = await _readXmlFrom()
-  const nextURL = '../1-parser/template.html'
+  const nextURL = '../1-processor/template.html'
   await insertXmlEntries(xmls)
   window.location.href = nextURL
 }
