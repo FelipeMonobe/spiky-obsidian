@@ -1,3 +1,4 @@
+const R = require('ramda')
 const { getLastNodes } = require('../../util/object')
 const { getLastRawXml, parseToXml, pluckXmls, updateXmls } = require('./service')
 const { groupByFirstProperty, filterByObjectPropertyName } = require('../../util/array')
@@ -35,9 +36,47 @@ vm.pluckProperties = async () => {
   const nextURL = '../2-exporter/template.html'
 
   const pluckedXmls = pluckXmls(vm.xmlsByModel, selectedOptions)
+
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+  const [multiple, single] = R
+  .partition(x => Object
+  .keys(x)
+  .map(y => x[y])
+  .some(y => Array.isArray(y))
+  , pluckedXmls)
+
+  const replicated = multiple
+  .map(x => {
+    const [arrayProps, otherProps] = R.partition(y => Array.isArray(x[y]), Object.keys(x))
+    const sample = arrayProps[0]
+    const result = []
+    let qty = x[sample].length
+
+    R.times(n => {
+      const body = {}
+
+      otherProps.forEach(y => {
+        body[y] = x[y]
+      })
+
+      arrayProps.forEach(y => {
+        body[y] = x[y][n]
+      })
+
+      result.push(body)
+    }, qty)
+
+    return result
+  })
+
+  const final = replicated
+  .reduce((acc, curr) => acc.concat(curr), [])
+  .concat(single)
+// /////////////////////////////////////////////////////////////////////////////////////////////////
+
   const lastRawXmlsId = vm.lastRawXmls.id
 
-  await updateXmls(lastRawXmlsId, pluckedXmls)
+  await updateXmls(lastRawXmlsId, final)
 
   window.location.href = nextURL
 }

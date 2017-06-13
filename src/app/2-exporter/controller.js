@@ -1,3 +1,4 @@
+
 const { getSampleProperties } = require('../../util/object')
 const { getPluckedXmls, openDirectoryDialog } = require('./service')
 

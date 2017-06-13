@@ -2,8 +2,6 @@ const { app } = require('electron')
 const { windows } = require('./config/electron')
 const { cleanup, destroyWindow, makeWindow } = require('./util/window')(app)
 
-require('./app/2-exporter/backend')
-
 let mainWindow = {}
 
 const bootstrap = (mainSettings) => {

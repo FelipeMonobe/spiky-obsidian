@@ -1,7 +1,7 @@
-const { last, path } = require('ramda')
 const { parseString } = require('xml2js')
 const { allSettled, denodeify } = require('q')
 const { getDbInstance } = require('../../util/db')
+const { getValueFromPropertyPath } = require('../../util/object')
 
 const _parseString = denodeify(parseString)
 
@@ -23,26 +23,20 @@ const getLastRawXml = async() => {
 }
 
 const pluckXmls = (xmls, options) => {
-  const numberPattern = /^[\d.]+$/
   const optionsValues = options
     .map(x => x.value)
 
-  return xmls
-    .map(x => {
-      const body = {}
+  const unormalizedXmls = xmls
+  .map(x => {
+    const body = {}
 
-      optionsValues.forEach(y => {
-        const pathSegments = y.split('.')
-        const prop = last(pathSegments)
-        const value = path(pathSegments, x)
+    optionsValues
+    .forEach(y => getValueFromPropertyPath(y, x, body))
 
-        body[prop] = numberPattern.test(value) && value.length < 13
-          ? parseFloat(value)
-          : value
-      })
+    return body
+  })
 
-      return body
-    })
+  return unormalizedXmls
 }
 
 const updateXmls = (id, xmls) => {
