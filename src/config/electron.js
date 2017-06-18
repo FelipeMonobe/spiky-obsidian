@@ -1,9 +1,10 @@
 const { format } = require('url')
 const { resolve } = require('path')
 
-const mainShapeWidth = 800
+const mainShapeWidth = 747
 const mainShapeHeight = 600
 const mainShapeFrame = false
+const mainUseContentSize = true
 const mainShape = { width: mainShapeWidth, height: mainShapeHeight, frame: mainShapeFrame }
 const mainCtrlPath = resolve('src/app/0-reader/template.html')
 const mainCtrlProtocol = 'file:'

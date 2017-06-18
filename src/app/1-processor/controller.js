@@ -7,6 +7,14 @@ const vm = {}
 
 vm.xmls = []
 vm.xmlsByModel = []
+vm.setLoading = (isLoading) => {
+  const loading = document.querySelector('#loading')
+  const display = isLoading
+    ? 'inherit'
+    : 'none'
+
+  loading.style.display = display
+}
 
 vm.previewXmlModel = () => {
   const xmlModel = document.querySelector('#xmlModel').value
@@ -16,6 +24,9 @@ vm.previewXmlModel = () => {
   const sampleXml = vm.xmlsByModel[0][xmlModel]
   const xmlProperties = getLastNodes(sampleXml, xmlModel)
   const selectProperties = document.querySelector('#xmlProperties')
+
+  selectProperties.style.display = 'inherit'
+  selectProperties.style.height = '400px'
 
   if (selectProperties.options.length > 0) {
     selectProperties.options.forEach((x, index) => selectProperties.remove(index))
@@ -93,6 +104,7 @@ const _modelPhase = async () => {
 const _viewPhase = ({ xmlModels, xmls, lastRawXmls }) => {
   const selectModel = document.querySelector('#xmlModel')
 
+  vm.setLoading(false)
   vm.xmls = xmls
   vm.lastRawXmls = lastRawXmls
 
