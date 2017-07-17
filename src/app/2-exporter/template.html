@@ -2,31 +2,43 @@
 
 <head>
   <title>Spiky Obsidian | Exportador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../../node_modules/material-design-lite/material.min.css">
+  <script src="../../../node_modules/material-design-lite/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <link rel="stylesheet" href="../_shared/style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-  <h1>Fase 2 - Exportador</h1>
-  <div>
-    <h3>Objetivos:</h3>
-    <ol>
-      <li>Definir propriedades para consolidar (somatório)</li>
-      <li>Definir caminho para salvar arquivo XLSX</li>
-    </ol>
-  </div>
-  <div>
-    <div>
-      <label>Consolidar:</label>
-      <div>
-        <select id="pluckedProperties" value="">
-          <option selected="selected" disabled>Selecione</option>
-        </select>
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp mainContainer">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Exportar</h2>
+    </div>
+    <div class="mdl-card__supporting-text contentContainer">
+      <strong>Objetivos:</strong>
+      <ol>
+        <li>Definir propriedades para consolidar (somatório);</li>
+        <li>Definir caminho para salvar arquivo XLSX;</li>
+      </ol>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <select id="pluckedProperties" value="">
+                <option selected="selected" disabled>Selecionar propriedade...</option>
+              </select>
+          <div class="mdl-tooltip mdl-tooltip" for="pluckedProperties">
+            Propriedade para consolidação
+          </div>
+        </div>
+      </div>
+      <div class="mdl-card__actions mdl-card--border footerContainer">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="vm.selectDirectory()">
+            Salvar
+          </a>
       </div>
     </div>
-  </div>
-  <div>
-    <label for="directory">Diretório:</label>
-    <button id="directory" type="button" onclick="vm.selectDirectory()">Selecionar</button>
-    <label id="selectedDirectory"></label>
   </div>
   <script async src="./controller.js"></script>
 </body>

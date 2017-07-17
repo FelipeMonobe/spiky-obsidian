@@ -40,7 +40,7 @@ vm.previewXmlModel = () => {
 }
 
 vm.pluckProperties = async () => {
-  const willProcess = document.querySelector('willProcess')
+  // const willProcess = document.querySelector('willProcess')
   const selectProperties = document.querySelector('#xmlProperties')
   const selectedOptions = Array.from(selectProperties.options)
     .filter(x => x.selected)

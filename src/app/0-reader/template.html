@@ -1,55 +1,56 @@
 <html>
 
-  <head>
-    <title>Spiky Obsidian | Leitor</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>Spiky Obsidian | Ler</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../../node_modules/material-design-lite/material.min.css">
-    <script src="../../../node_modules/material-design-lite/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="../../../node_modules/material-design-lite/material.min.css">
+  <script src="../../../node_modules/material-design-lite/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="./style.css">
-  </head>
+  <link rel="stylesheet" href="../_shared/style.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
 
-  <body>
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-      <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Leitura</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <strong>Objetivos:</strong>
-        <ol>
-          <li>Definir diretório de leitura;</li>
-          <li>Definir padrão de busca;</li>
-        </ol>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--12-col">
-            <button id="directory" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" type="button" onclick="vm.selectDirectory()">
+<body>
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp mainContainer">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Leitura</h2>
+    </div>
+    <div class="mdl-card__supporting-text contentContainer">
+      <strong>Objetivos:</strong>
+      <ol>
+        <li>Definir diretório de leitura;</li>
+        <li>Definir padrão de busca;</li>
+      </ol>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <button id="directory" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" type="button" onclick="vm.selectDirectory()">
               <i id="folderIcon" class="material-icons">folder</i>
             </button>
-            <div class="mdl-tooltip mdl-tooltip" for="folderIcon">
-              Diretório de busca
-            </div>
-            <label id="selectedDirectory">Nenhum diretório selecionado.</label>
+          <div class="mdl-tooltip mdl-tooltip" for="folderIcon">
+            Diretório de busca
           </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="pattern" value="**/*.xml">
-              <label class="mdl-textfield__label" for="sample3">Padrão</label>
-            </div>
-            <div class="mdl-tooltip mdl-tooltip" for="pattern">
-              Padrão de busca
-            </div>
-          </div>
+          <label id="selectedDirectory">Nenhum diretório selecionado.</label>
         </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="vm.readAndStoreRawXmls()">
-            Avançar
-          </a>
+        <div class="mdl-cell mdl-cell--12-col">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="pattern" value="**/*.xml">
+            <label class="mdl-textfield__label" for="sample3">Padrão</label>
+          </div>
+          <div class="mdl-tooltip mdl-tooltip" for="pattern">
+            Padrão de busca
+          </div>
         </div>
       </div>
+      <div class="mdl-card__actions mdl-card--border footerContainer">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="vm.readAndStoreRawXmls()">
+            Avançar
+          </a>
+      </div>
     </div>
-    <script async src="./controller.js"></script>
-  </body>
+  </div>
+  <script async src="./controller.js"></script>
+</body>
 
 </html>

@@ -1,64 +1,62 @@
 <html>
 
-  <head>
-    <title>Spiky Obsidian | Processador</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>Spiky Obsidian | Processador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../../../node_modules/material-design-lite/material.min.css">
-    <script src="../../../node_modules/material-design-lite/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="../../../node_modules/material-design-lite/material.min.css">
+  <script src="../../../node_modules/material-design-lite/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <link rel="stylesheet" href="./style.css">
-  </head>
+  <link rel="stylesheet" href="../_shared/style.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
 
-  <body>
-    <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-      <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Processador</h2>
-      </div>
-      <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
-      <div class="mdl-card__supporting-text">
-        <strong>Objetivos:</strong>
-        <ol>
-          <li>Definir modelo de XML;</li>
-          <li>Definir propriedades para extração;</li>
-        </ol>
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--12-col">
-            <select id="xmlModel" onchange="vm.previewXmlModel()">
+<body>
+  <div class="demo-card-wide mdl-card mdl-shadow--2dp mainContainer">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text">Processar</h2>
+    </div>
+    <div id="loading" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
+    <div class="mdl-card__supporting-text contentContainer">
+      <strong>Objetivos:</strong>
+      <ol>
+        <li>Definir modelo de XML;</li>
+        <li>Definir propriedades para extração;</li>
+      </ol>
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <select id="xmlModel" onchange="vm.previewXmlModel()">
               <option selected="selected" disabled>Selecionar modelo...</option>
             </select>
-            <div class="mdl-tooltip mdl-tooltip" for="xmlModel">
-              Modelos de XML
-            </div>
+          <div class="mdl-tooltip mdl-tooltip" for="xmlModel">
+            Modelo para processamento
           </div>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <select id="xmlProperties" style="display: none" multiple></select>
-            <div class="mdl-tooltip mdl-tooltip" for="xmlProperties">
-              Propriedades do modelo
-            </div>
-          </div>
-          </div>
-          <div class="mdl-cell mdl-cell--12-col">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="willProcess">
-              <input id="willProcess" type="checkbox" class="mdl-switch__input">
-              <span class="mdl-switch__label">Consolidar</span>
-            </label>
-            <div class="mdl-tooltip mdl-tooltip" for="willProcess">
-              Consolidar valor
-            </div>
-          </div>
-          </div>
-        </div>
-        <div class="mdl-card__actions mdl-card--border">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="vm.pluckProperties()">
-            Avançar
-          </a>
         </div>
       </div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <select id="xmlProperties" style="display: none" multiple></select>
+        <div class="mdl-tooltip mdl-tooltip" for="xmlProperties">
+          Propriedades para extração
+        </div>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="willProcess">
+          <input id="willProcess" type="checkbox" class="mdl-switch__input">
+          <span class="mdl-switch__label">Consolidar</span>
+        </label>
+        <div class="mdl-tooltip mdl-tooltip" for="willProcess">
+          Deseja consolidar algum valor?
+        </div>
+      </div>
+      <div class="mdl-card__actions mdl-card--border footerContainer">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="vm.pluckProperties()">
+          Avançar
+        </a>
+      </div>
     </div>
-    <script async src="./controller.js"></script>
-  </body>
+  </div>
+  <script async src="./controller.js"></script>
+</body>
 
 </html>
