@@ -3,6 +3,8 @@ const { flatten, head, last, keys, map, path, pipe } = require('ramda')
 const getLastNodes = (node, nodePath = 'obj') => {
   const recurseChildren = map(prop => {
     if (typeof node[prop] !== 'object') return `${nodePath}.${prop}`
+    if (node[prop].length) return `${nodePath}.${prop}`
+
     return getLastNodes(node[prop], `${nodePath}.${prop}`)
   })
 

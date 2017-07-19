@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "flow-remove-types -p ./src -d build/ -i node_modules",
-    "debug": "electron --debug ./src",
-    "flow": "flow",
-    "flow:install": "flow-typed install",
-    "test": "mocha app/**/*.spec.js",
-    "start": "electron ./src"
+    "build": "npx flow-remove-types -p ./src -d build/ -i node_modules",
+    "debug": "npx electron --debug ./src",
+    "flow": "npx flow",
+    "flow:install": "npx flow-typed install",
+    "test": "npx mocha app/**/*.spec.js",
+    "start": "npx electron ./src"
   },
   "repository": {
     "type": "git",
