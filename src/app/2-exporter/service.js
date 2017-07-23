@@ -1,41 +1,46 @@
-const { denodeify } = require('q')
+const { denodeify, defer } = require('q')
 const { build } = require('node-xlsx')
 const { writeFile } = require('graceful-fs')
-const { prepend, values } = require('ramda')
+const { head, keys, pipe, prepend } = require('ramda')
+const { getListedValuesFromObjects } = require('../../util/array')
 const { getDbInstance } = require('../../util/db')
 const { remote: { dialog } } = require('electron')
 
 const _writeFile = denodeify(writeFile)
-const _prependHeaders = (props, data) => prepend(props, data)
+const _showSaveDialog = filters => {
+  const deferred = defer()
 
-const _buildXlsx = (name, header, body) => {
-  let data = body.map(x => values(x))
+  dialog.showSaveDialog(filters, path => deferred.resolve(path))
+  return deferred.promise
+}
 
-  if (header) data = _prependHeaders(header, body)
+const _buildXlsx = (name, body) => {
+  const header = pipe(head, keys)(body)
+  let data = getListedValuesFromObjects(header, body)
 
+  data = prepend(header, data)
   return build([{ name, data }])
 }
 
 const _exportToXlsx = async (path, body) => {
-  const pathArr = path.split('/')
-  const filename = pathArr[pathArr.length - 1]
-  const xlsxBuffer = _buildXlsx(filename, null, body)
+  const filename = path.split('/').pop()
+  const xlsxBuffer = _buildXlsx(filename, body)
+
   await _saveXlsx(path, xlsxBuffer)
 }
 
-const openDirectoryDialog = (body) => {
+const openDirectoryDialog = async (body) => {
   const filters = [{
     name: 'Microsoft Excel Open XML Format Spreadsheet',
     extensions: ['xlsx']
   }]
+  const path = await _showSaveDialog({ filters })
 
-  dialog
-    .showSaveDialog({ filters }, (path) => _exportToXlsx(path, body))
+  _exportToXlsx(path, body)
 }
 
 const getPluckedXmls = async () => {
   const database = getDbInstance()
-
   const data = await database
     .table('xmls')
     .orderBy('id')

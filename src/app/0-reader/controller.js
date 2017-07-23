@@ -12,6 +12,9 @@ vm.selectDirectory = async () => {
 vm.readAndStoreRawXmls = async () => {
   const xmls = await _readXmlFrom()
   const nextURL = '../1-processor/template.html'
+
+  window.localStorage['reader.caminho'] = document.querySelector('#selectedDirectory').innerText
+
   await insertXmlEntries(xmls)
   window.location.href = nextURL
 }
@@ -22,3 +25,14 @@ const _readXmlFrom = async () => {
   const rawXmls = await readXmlFrom(cwd, pattern)
   return rawXmls
 }
+
+const _viewPhase = () => {
+  document.querySelector('#selectedDirectory').innerText = window.localStorage['reader.caminho'] ||
+  'Nenhum diretório selecionado.'
+}
+
+const init = async () => {
+  _viewPhase()
+}
+
+window.onload = init

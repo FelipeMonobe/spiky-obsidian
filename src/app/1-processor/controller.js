@@ -24,7 +24,7 @@ vm.previewXmlModel = () => {
   const xmlSamples = vm.xmlsByModel.map(x => x[xmlModel])
   const xmlSamplesProps = xmlSamples.map(x => getLastNodes(x, xmlModel))
   const xmlSamplesPropsFlattened = xmlSamplesProps.reduce((x, y) => x.concat(y), [])
-  const uniquexmlSamplesProps = R.uniq(xmlSamplesPropsFlattened)
+  const uniqueXmlSamplesProps = R.uniq(xmlSamplesPropsFlattened)
 
   const selectProperties = document.querySelector('#xmlProperties')
 
@@ -35,7 +35,7 @@ vm.previewXmlModel = () => {
     selectProperties.options.forEach((x, index) => selectProperties.remove(index))
   }
 
-  uniquexmlSamplesProps.forEach(x => {
+  uniqueXmlSamplesProps.forEach(x => {
     const selectOption = document.createElement('option')
     selectOption.text = selectOption.value = x
     selectProperties.add(selectOption)
@@ -48,7 +48,6 @@ vm.pluckProperties = async () => {
   const selectedOptions = Array.from(selectProperties.options)
     .filter(x => x.selected)
   const nextURL = '../2-exporter/template.html'
-
   const pluckedXmls = pluckXmls(vm.xmlsByModel, selectedOptions)
 
 // /////////////////////////////////////////////////////////////////////////////////////////////////
