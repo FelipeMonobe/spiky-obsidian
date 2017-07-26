@@ -6,8 +6,9 @@ const { remote: { dialog } } = require('electron')
 
 const _readFile = denodeify(readFile)
 const _glob = denodeify(glob)
+const nocase = true
 
-const _getXmlPaths = (cwd, selectedGlob) => _glob(selectedGlob, { cwd })
+const _getXmlPaths = (cwd, selectedGlob) => _glob(selectedGlob, { cwd, nocase })
 const _readXmlContent = (cwd, xmlPaths) => all(xmlPaths
   .map(xmlPath => _readFile(`${cwd}/${xmlPath}`, 'utf-8')))
 
