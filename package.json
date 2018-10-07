@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx flow-remove-types -p ./src -d build/ -i node_modules",
-    "debug": "npx electron --debug ./src",
+    "debug": "npx electron --inspect-brk ./src",
     "flow": "npx flow",
     "flow:install": "npx flow-typed install",
     "test": "npx mocha app/**/*.spec.js",

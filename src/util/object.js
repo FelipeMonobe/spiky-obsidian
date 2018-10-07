@@ -1,4 +1,4 @@
-const { flatten, head, last, keys, map, path, pipe } = require('ramda')
+const { flatten, head, keys, map, path, pipe } = require('ramda')
 
 const getLastNodes = (node, nodePath = 'obj') => {
   const recurseChildren = map(prop => {
@@ -19,13 +19,11 @@ const getSampleProperties = (arr) => {
 // [String] -> Object -> [String]
 const getValueFromPropertyPath = (fullPath, source, target) => {
   const pathSegments = fullPath.split('.')
-  const prop = last(pathSegments)
   let pathValue = null
 
   pathSegments
   .forEach((segment, index, segments) => {
-    const currPath = segments.slice(0, index + 1)
-    const value = path(currPath, source)
+    const value = path(segment, source)
     if (Array.isArray(value)) {
       const restPath = segments.slice(index + 1, segments.length)
       pathValue = value
@@ -33,7 +31,7 @@ const getValueFromPropertyPath = (fullPath, source, target) => {
     }
   })
 
-  target[prop] = pathValue && pathValue.length
+  target[fullPath] = pathValue && pathValue.length
   ? pathValue
   : path(fullPath.split('.'), source)
 }
